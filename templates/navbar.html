@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 60px;
+            background-color: #111;
+            padding-top: 60px;
+            transition: width 0.15s;
+        }
+
+        .sidebar .logo {
+            padding: 10px;
+            margin-bottom: 50px;
+            text-align: center;
+
+        }
+
+        .sidebar .logo img {
+            max-width: 100%;
+
+        }
+
+        .sidebar:hover {
+            width: 140px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .sidebar li a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar li i {
+            margin-right: 10px;
+            font-size: 30px;
+        }
+
+        .sidebar li span {
+            display: none;
+            font-size: 20px;
+        }
+
+        .sidebar:hover li span {
+            display: inline;
+        }
+
+        .sidebar li:not(:last-child) {
+            margin-bottom: 35px;
+        }
+
+        .sidebar .last-button {
+            position: absolute;
+            bottom: 10px;
+            width: calc(100% - 20px);
+        }
+
+        .sidebar .last-button a {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .last-button a i {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img src="{% static 'logo.png' %}" alt="Logo">
+{#        <span>Howling</span>#}
+    </div>
+    <ul>
+        <li>
+            <a href="{% url 'home_page' %}" data-toggle="tooltip" data-placement="right">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'store' %}" data-toggle="tooltip" data-placement="right">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span>Store</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'create-game' %}" data-toggle="tooltip" data-placement="right">
+                <i class="fas fa-upload"></i>
+                <span>Upload</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'list-of-games' %}" data-toggle="tooltip" data-placement="right">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                <span>Library</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-toggle="tooltip" data-placement="right">
+                <i class="fas fa-search"></i>
+                <span>Search</span>
+            </a>
+        </li>
+
+        <li class="last-button">
+            {% if user.is_authenticated %}
+                <a href="{% url 'list-of-games' %}" data-toggle="tooltip" data-placement="right">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+{#                    <span>{{ User }}</span>#}
+                    <span>{{ new_user.username }}</span>
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" data-toggle="tooltip" data-placement="right">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    <span>User</span>
+                </a>
+            {% endif %}
+        </li>
+
+    </ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+</body>
+</html>
