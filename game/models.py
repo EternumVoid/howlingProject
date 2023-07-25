@@ -1,4 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.shortcuts import render
 
 
 class Game(models.Model):
@@ -6,9 +8,17 @@ class Game(models.Model):
     genre = models.CharField(max_length=50)
     developer = models.CharField(max_length=50)
     release_date = models.DateField()
-    description = models.TextField(max_length=500)
-    price = models.IntegerField()
+    description = models.TextField(max_length=450)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     active = models.BooleanField(default=True)
+    uploaded = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='static/game_images', null=True, blank=True)
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return f'{self.title}'
+
+
+# class LibraryGame(models.Model):
+#
+#     game = models.ForeignKey(Game, on_delete=models.CASCADE)

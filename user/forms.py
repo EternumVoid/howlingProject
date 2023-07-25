@@ -1,11 +1,12 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from howlingProject.forms import CustomUserCreationForm
 
 
-class UserForm(UserCreationForm):
+class UserForm(CustomUserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email']
+        fields = ['first_name', 'last_name', 'username', 'email', 'category']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,6 +18,8 @@ class UserForm(UserCreationForm):
         self.fields['username'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Please enter your username'})
         self.fields['email'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Please enter your email'})
+        self.fields['category'].widget.attrs.update(
+            {'class': 'form-select', 'placeholder': 'Please select your category'})
         self.fields['password1'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Please enter your password'})
         self.fields['password2'].widget.attrs.update(

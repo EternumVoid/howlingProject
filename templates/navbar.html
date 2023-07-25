@@ -31,7 +31,7 @@
         }
 
         .sidebar:hover {
-            width: 140px;
+            width: 150px;
         }
 
         .sidebar ul {
@@ -91,7 +91,7 @@
 <div class="sidebar">
     <div class="logo">
         <img src="{% static 'logo.png' %}" alt="Logo">
-{#        <span>Howling</span>#}
+        {#        <span>Howling</span>#}
     </div>
     <ul>
         <li>
@@ -106,18 +106,23 @@
                 <span>Store</span>
             </a>
         </li>
-        <li>
-            <a href="{% url 'create-game' %}" data-toggle="tooltip" data-placement="right">
-                <i class="fas fa-upload"></i>
-                <span>Upload</span>
-            </a>
-        </li>
-        <li>
-            <a href="{% url 'list-of-games' %}" data-toggle="tooltip" data-placement="right">
-                <i class="fa fa-list" aria-hidden="true"></i>
-                <span>Library</span>
-            </a>
-        </li>
+        {#        {% if user.is_authenticated %}#}
+        {% if perms.game.add_game or perms.game.view_game or perms.game.change_game or perms.game.delete_game %}
+            <li>
+                <a href="{% url 'create-game' %}" data-toggle="tooltip" data-placement="right">
+                    <i class="fas fa-upload"></i>
+                    <span>Upload</span>
+                </a>
+            </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'library' %}" data-toggle="tooltip" data-placement="right">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    <span>Library</span>
+                </a>
+            </li>
+        {% endif %}
         <li>
             <a href="#" data-toggle="tooltip" data-placement="right">
                 <i class="fas fa-search"></i>
@@ -125,17 +130,17 @@
             </a>
         </li>
 
+
         <li class="last-button">
             {% if user.is_authenticated %}
-                <a href="{% url 'list-of-games' %}" data-toggle="tooltip" data-placement="right">
+                <a href="{% url 'profile' %}" data-toggle="tooltip" data-placement="right">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
-{#                    <span>{{ User }}</span>#}
-                    <span>{{ new_user.username }}</span>
+                    <span>{{ user.username }}</span>
                 </a>
             {% else %}
                 <a href="{% url 'login' %}" data-toggle="tooltip" data-placement="right">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
-                    <span>User</span>
+                    {#                    <span>User</span>#}
                 </a>
             {% endif %}
         </li>

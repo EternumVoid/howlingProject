@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Library {% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
+
+    <div class="centered display: flex justify-content: center align-items: center;">
+
+        <div class="centered-div">
+            <h1>{{ request.user.username }} Library</h1>
+        </div>
+
+        <br><br><br>
+
+        <div class="purchased">
+            {#            <h3><i class="fa fa-bars" aria-hidden="true"></i> All purchased games ( {{ all_games.count }} )</h3>#}
+            <h3><i class="fa fa-bars" aria-hidden="true"></i> All purchased games ( {{ game_count }} )</h3>
+        </div>
+
+        <br>
+
+        {#                        {% for game in all_games %}#}
+        {% for game in library_games %}
+
+            <div class="card text-bg-dark mb-3 h-100" style="max-width: 50rem;">
+                <div class="row g-0">
+                    <div class="centered-div col-md-6">
+                        {% if game.image %}
+                            <img src="{{ game.image.url }}" class="card-img-top" alt="...">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ game.title }}</h3>
+                            <p class="card-text">Developer: {{ game.developer }}</p>
+                            <p class="card-text">Genre: {{ game.genre }}</p>
+                            <p class="card-text">Release date: {{ game.release_date|date:"d-m-Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+        {#                {% endfor %}#}
+
+        {% if perms.game.add_game or perms.game.change_game or perms.game.delete_game %}
+
+            <div class="purchased">
+                <h3><i class="fa fa-star" aria-hidden="true"></i> All uploaded games ( {{ uploaded_games.count }} )</h3>
+            </div>
+
+            <br>
+
+            {% for game in uploaded_games %}
+
+                <div class="card text-bg-dark mb-3 h-100" style="max-width: 50rem;">
+                    <div class="row g-0">
+                        <div class="centered-div col-md-6">
+                            {% if game.image %}
+                                <img src="{{ game.image.url }}" class="card-img-top" alt="...">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ game.title }}</h3>
+                                <p class="card-text">Developer: {{ game.developer }}</p>
+                                <p class="card-text">Genre: {{ game.genre }}</p>
+                                <p class="card-text">Release date: {{ game.release_date|date:"d-m-Y" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="btn-group dropend col-md-1">
+                            <button class="btn btn-outline-success dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu text-bg-dark">
+                                <li><a class="dropdown-item active text-bg-dark"
+                                       href="{% url 'update-game' game.id %}">Update</a>
+                                </li>
+                                <li><a class="dropdown-item active text-bg-dark"
+                                       href="{% url 'delete-game' game.id %}">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+{% endblock %}

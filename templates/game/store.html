@@ -1,67 +1,43 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %} Upload a new game {% endblock %}
+{% block title %} Store {% endblock %}
 
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="text-center alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    {% if all_games %}
-        <table class="table">
-            <thead>
-            <th>No.</th>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Developer</th>
-            <th>Release Date</th>
-            <th>Price</th>
-            <th>Active</th>
-            <th>Actions</th>
-            </thead>
-            <tbody>
-            {% for game in all_games %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ game.title }}</td>
-                    <td>{{ game.genre }}</td>
-                    <td>{{ game.developer }}</td>
-                    <td>{{ game.release_date|date:"d-m-Y" }}</td>
-                    <td>{{ game.price }}</td>
-                    <td>
-                        {% if game.active %}
-                            Yes
-                        {% else %}
-                            No
-                        {% endif %}
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-success dropdown-toggle" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                More Actions
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"
-                                       href="{% url 'update-game' game.id %}">Update</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                       href="{% url 'delete-game' game.id %}">Delete</a>
-                                </li>
-                            </ul>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+
+    {#    <div class="d-flex align-items-center justify-content-center vh-100">#}
+    <div class="row row-cols-md-5 g-4 offset-1">
+
+        {% for game in all_games %}
+
+            <div class="col">
+                <div class="card border-info mb-3 card text-bg-dark mb-3 h-100" style="width: 25rem;">
+                    {% if game.image %}
+                        <img src="{{ game.image.url }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ game.title }}</h5>
+                        <p class="card-text">{{ game.description }}</p>
+                        <p class="card-text">Developer: {{ game.developer }}</p>
+                        <p class="card-text">Genre: {{ game.genre }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="left-side">
+                            <p class="card-text">Price: {{ game.price }} €</p>
                         </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <h3 class="text-center">No Games</h3>
-    {% endif %}
+                        <div class="right-side">
+                            <a href="{% url 'purchase_game' game.id %}" class="btn btn-primary align-items-center">Purchase</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
     </div>
-    </div>
-    </div>
+    {#    </div>#}
+
 {% endblock %}

@@ -1,31 +1,55 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block title %} Login {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <br><br>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="text-center">Login</h3>
-                    </div>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="card-body">
-                            {{ form.as_p }}
-                        </div>
-                        <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-outline-success">Login</button>
-                            <a href="{% url 'create-user' %}" class="btn btn-outline-secondary">Sing up</a>
-{#                            <a href="{% url 'password_reset' %}" class="btn btn-outline-danger">Forgot your password?</a>#}
-                        </div>
-                    </form>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <div class="d-flex justify-content-center align-items-center mb-5">
+                    <img src="{% static 'howling_void_login2.png' %}" alt="Your Image" width="1200">
                 </div>
+
+                <br><br><br><br><br>
+
+                <form method="post" class="zoom-in">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username" class="text-white">Username:</label>
+                        <input type="text" name="username" class="form-control bg-dark text-white" id="id_username"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password" class="text-white">Password:</label>
+                        <input type="password" name="password" class="form-control bg-dark text-white" id="id_password"
+                               required>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-glow-primary">Login</button>
+                        <a href="{% url 'create-user' %}" class="btn btn-success btn-glow-success ml-5">Sign Up</a>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block extra_css %}
+
+    <style>
+        body {
+            background-color: #222; /* Change the background color of the entire page */
+            overflow-y: hidden;
+        }
+    </style>
 
 {% endblock %}

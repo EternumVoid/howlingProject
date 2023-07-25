@@ -8,17 +8,19 @@ class GameFilters(django_filters.FilterSet):
     # title = django_filters.ChoiceFilter(choices=list(set(list_of_games)))
 
     title = django_filters.CharFilter(lookup_expr='icontains', label='Title')
-    genre = django_filters.CharFilter(lookup_expr='icontains', label='Genre')
+    # genre = django_filters.CharFilter(lookup_expr='icontains', label='Genre')
 
     class Meta:
         model = Game
-        fields = ['title', 'genre']
+        fields = ['title']
+        # 'genre'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.filters['title'].field.widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter the game title'})
-        self.filters['genre'].field.widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter the game genre'})
+        # self.filters['genre'].field.widget.attrs.update({'class': 'form-control', 'placeholder': 'Enter the game genre'})
+
 
 
 

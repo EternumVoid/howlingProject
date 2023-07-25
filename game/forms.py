@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import TextInput, NumberInput, DateInput, Textarea
+from django.forms import TextInput, NumberInput, DateInput, Textarea, FileInput, CheckboxInput
 
 from game.models import Game
 
@@ -7,8 +7,8 @@ from game.models import Game
 class GameForm(forms.ModelForm):
     class Meta:
         model = Game
-        # fields = '__all__'
-        fields = ['title', 'genre', 'developer', 'release_date', 'description', 'price']
+        fields = '__all__'
+        # fields = ['title', 'genre', 'developer', 'release_date', 'description', 'uploaded', 'price', 'image']
         widgets = {
             'title': TextInput(attrs={'placeholder': 'Enter the game title', 'class': 'form-control'}),
             'genre': TextInput(attrs={'placeholder': 'Enter the game genre', 'class': 'form-control'}),
@@ -16,7 +16,8 @@ class GameForm(forms.ModelForm):
             'release_date': DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'description': Textarea(
                 attrs={'placeholder': 'Enter the game description', 'class': 'form-control', 'rows': 3}),
-            'price': NumberInput(attrs={'placeholder': 'Enter the game price', 'class': 'form=control'})
+            'price': NumberInput(attrs={'placeholder': 'Enter the game price', 'class': 'form-control'}),
+            'image': FileInput(attrs={'id': 'image_field', 'class': 'form-control'})
 
         }
 
@@ -31,8 +32,8 @@ class GameForm(forms.ModelForm):
 class GameUpdateForm(forms.ModelForm):
     class Meta:
         model = Game
-        # fields = '__all__'
-        fields = ['title', 'genre', 'developer', 'release_date', 'description', 'price']
+        fields = '__all__'
+        # fields = ['title', 'genre', 'developer', 'release_date', 'description', 'price', 'image']
         widgets = {
             'title': TextInput(attrs={'placeholder': 'Enter the game title', 'class': 'form-control'}),
             'genre': TextInput(attrs={'placeholder': 'Enter the game genre', 'class': 'form-control'}),
@@ -40,6 +41,7 @@ class GameUpdateForm(forms.ModelForm):
             'release_date': DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'description': Textarea(
                 attrs={'placeholder': 'Enter the game description', 'class': 'form-control', 'rows': 3}),
-            'price': NumberInput(attrs={'placeholder': 'Enter the game price', 'class': 'form=control'})
+            'price': NumberInput(attrs={'placeholder': 'Enter the game price', 'class': 'form=control'}),
+            'image': FileInput(attrs={'id': 'image_field', 'class': 'form-control'})
 
         }
