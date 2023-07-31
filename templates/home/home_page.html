@@ -1,9 +1,32 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Home {% endblock %}
 
 {% block content %}
 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+
+    <body>
+    <div class="centered-container">
+        <div class="centered-content">
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <img src="{% static 'void_wolf.png' %}" alt="Your Image" width="400">
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <img src="{% static 'howling_void_login2.png' %}" alt="Your Image" width="1200">
+            </div>
+
+            <div class="text-center">
+                <h2>SDA Final Project: Games Market</h2>
+                <h3>by Mihalache Alexandru</h3>
+            </div>
+
+        </div>
+    </div>
+    </body>
 
 
 {% endblock %}

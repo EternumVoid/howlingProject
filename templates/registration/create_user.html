@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Create a new user {% endblock %}
 
 {% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
+    <br><br><br><br><br><br><br><br>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 offset-md-3">
@@ -11,14 +16,14 @@
                     <div class="card-header">
                         <h3 class="text-center">Create a new user</h3>
                     </div>
-                    <form method="post">
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="card-body">
                             {{ form.as_p }}
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-outline-success">Save</button>
-                            <a href="{% url 'login' %}" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn btn-success btn-glow-success">Save</button>
+                            <a href="{% url 'login' %}" class="btn btn btn-danger btn-glow-danger ml-5">Cancel</a>
                         </div>
                     </form>
                 </div>

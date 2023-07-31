@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Delete - {{ game }} {% endblock %}
 
 {% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div class="container-fluid">
         <div class="row">
@@ -13,12 +17,12 @@
                     </div>
                     <form method="post">
                         {% csrf_token %}
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             <h2>Are you sure you want to delete {{ game }}?</h2>
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-outline-danger">Yes</button>
-                            <a href="{% url 'library' %}" class="btn btn-outline-secondary">No</a>
+                            <button type="submit" class="btn btn-success btn-glow-success">Yes</button>
+                            <a href="{% url 'library' %}" class="btn btn-danger btn-glow-danger ml-5">No</a>
                         </div>
                     </form>
                 </div>

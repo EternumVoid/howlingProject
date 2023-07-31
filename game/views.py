@@ -9,9 +9,6 @@ from django.views.generic.edit import BaseFormView
 from game.filters import GameFilters
 from game.forms import GameForm, GameUpdateForm
 from game.models import Game
-from user.models import Library
-
-from django.contrib import messages
 
 
 class GameCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -29,6 +26,7 @@ class GameHomeView(ListView):
 
     def get_queryset(self):
         return Game.objects.filter(active=True)
+        # .order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,6 +35,12 @@ class GameHomeView(ListView):
         get_all_games = my_filters.qs
         context['all_games'] = get_all_games
         context['form_filters'] = my_filters.form
+
+        # ##############################################################################
+        user = self.request.user
+        owned_games_ids = get_all_games.filter(users=user).values_list('id', flat=True)
+        context['owned_games_ids'] = list(owned_games_ids)
+
         return context
 
 
@@ -56,6 +60,13 @@ class GameListView(LoginRequiredMixin, ListView):
         context['all_games'] = self.get_queryset()
         context['uploaded_games'] = filtered_games.filter(uploaded=True)
         context['form_filters'] = my_filters.form
+
+        # #####################################################################
+        user = self.request.user
+        games = Game.objects.filter(users=user)
+        game_count = games.count()
+        context['library_games'] = games
+        context['game_count'] = game_count
 
         return context
 
@@ -78,7 +89,27 @@ class GameDeteleView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'registration/profile.html'
     model = User
+
     # success_url = reverse_lazy('home_page')
+
+    # ############################################################################################
+    def get_queryset(self):
+        return Game.objects.filter(active=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = self.request.user
+        games = Game.objects.filter(users=user)
+        game_count = games.count()
+        context['game_count'] = game_count
+
+        my_filters = GameFilters(self.request.GET, queryset=self.get_queryset())
+        filtered_games = my_filters.qs
+        uploaded_games_count = filtered_games.filter(uploaded=True).count()
+        context['uploaded_games_count'] = uploaded_games_count
+
+        return context
 
 
 # ############################################################################################
@@ -95,18 +126,17 @@ def purchase_game(request, game_id):
     else:
         return redirect('store')
 
+# @login_required
+# def library(request):
+#     user = request.user
+#     games = Game.objects.filter(users=user)
+#     game_count = games.count()
+#     context = {
+#         'library_games': games,
+#         'game_count': game_count,
+#     }
 
-@login_required
-def library(request):
-    user = request.user
-    games = Game.objects.filter(users=user)
-    game_count = games.count()
-    context = {
-        'library_games': games,
-        'game_count': game_count,
-    }
+# games = Game.objects.filter(users__in=[request.user])
+# context = {'library_games': games}
 
-    # games = Game.objects.filter(users__in=[request.user])
-    # context = {'library_games': games}
-
-    return render(request, 'game/library.html', context)
+# return render(request, 'game/library.html', context)

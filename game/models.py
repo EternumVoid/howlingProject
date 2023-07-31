@@ -17,8 +17,3 @@ class Game(models.Model):
 
     def __str__(self):
         return f'{self.title}'
-
-
-# class LibraryGame(models.Model):
-#
-#     game = models.ForeignKey(Game, on_delete=models.CASCADE)

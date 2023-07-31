@@ -1,8 +1,13 @@
 {%  extends 'base.html' %}
+{% load static %}
 
 {% block title %} Upload a new game {% endblock %}
 
 {% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
+    <br><br><br>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-6 offset-md-3">
@@ -16,7 +21,8 @@
                             {{ form.as_p }}
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-outline-success">Save</button>
+                            <button type="submit" class="btn btn btn-success btn-glow-success">Save</button>
+                            <a href="{% url 'store' %}" class="btn btn btn-danger btn-glow-danger ml-5">Cancel</a>
                         </div>
                     </form>
                 </div>

@@ -20,13 +20,14 @@ from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import path, include
 
-from user.forms import AuthenticationNewForm
+from user.forms import AuthenticationNewForm, PasswordChangeForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('game.urls')),
     path('', include('home.urls')),
     path("login/", views.LoginView.as_view(form_class=AuthenticationNewForm), name="login"),
+    path("password_change/", views.PasswordChangeView.as_view(form_class=PasswordChangeForm), name="password_change"),
 
     path('', include('django.contrib.auth.urls')),
 

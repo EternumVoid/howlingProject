@@ -35,3 +35,12 @@ class AuthenticationNewForm(AuthenticationForm):
             {'class': 'form-control', 'placeholder': 'Please enter your user name'})
         self.fields['password'].widget.attrs.update(
             {'class': 'form-control', 'placeholder': 'Please enter your password'})
+
+
+class PasswordChangeForm(PasswordChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Please enter your current password'})
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Please enter your new password'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Please confirm your new password'})

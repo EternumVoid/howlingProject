@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Update - {{ game }} {% endblock %}
 
 {% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/upload.css' %}">
+    <br><br><br><br>
 
     <div class="container-fluid">
         <div class="row">
@@ -17,8 +21,8 @@
                             {{ form.as_p }}
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-outline-succes">Update</button>
-                            <a href="{% url 'library' %}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-success btn-glow-success">Update</button>
+                            <a href="{% url 'library' %}" class="btn btn-danger btn-glow-danger ml-5">Cancel</a>
                         </div>
                     </form>
                 </div>
