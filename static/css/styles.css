@@ -1,0 +1,29 @@
+.card {
+    /* Set the card size and other styles as needed */
+    width: 300px;
+    height: 600px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgb(0, 186, 253); /* Add initial blue glow */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for glow effect */
+}
+
+.card:hover {
+    box-shadow: 0 0 30px rgb(0, 186, 253);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.left-side {
+    flex: 1; /* Take half of the available width */
+}
+
+.right-side {
+    flex: 1; /* Take half of the available width */
+    text-align: right; /* Align the button to the right */
+}

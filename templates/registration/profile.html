@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+
+
+    <div class="centered-container">
+        <div class="centered-content">
+
+            <br><br><br><br><br>
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <h1>Welcome, {{ request.user.username }}!</h1>
+            </div>
+
+            <br><br><br><br><br>
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <h4>You're member since: {{ request.user.date_joined|date:"d-m-Y" }}</h4>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <h4>No. of purchased games: {{ game_count }}</h4>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <h4>No. of uploaded games: {{ uploaded_games_count }}</h4>
+            </div>
+
+            <br><br><br><br><br>
+
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-glow-danger"><i class="fa fa-sign-out"
+                                                                                       aria-hidden="true"></i>Logout</a>
+                <a href="{% url 'password_reset' %}" class="btn btn-warning btn-glow-warning ml-5">Change password</a>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
