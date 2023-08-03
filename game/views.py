@@ -18,6 +18,15 @@ class GameCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('library')
     permission_required = 'game.add_game'
 
+    # ##############################################################################
+    def form_valid(self, form):
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.uploader = self.request.user
+            game.save()
+            return redirect(self.success_url)
+        return super().form_valid(form)
+
 
 class GameHomeView(ListView):
     template_name = 'game/store.html'

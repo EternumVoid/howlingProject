@@ -32,8 +32,6 @@ class UserCreateView(CreateView):
             new_user.first_name = new_user.first_name.title()
             new_user.last_name = new_user.last_name.title()
 
-            # new_user.username = f'{new_user.first_name[0].lower()}{new_user.last_name.lower().replace(" ", "")}_{randint(100, 999)}'
-
             new_user.save()
 
             group = form.cleaned_data['category']

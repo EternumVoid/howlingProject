@@ -11,6 +11,5 @@ class CustomUserCreationForm(UserCreationForm):
     profile_picture = forms.ImageField(required=False)
 
     class Meta:
-        model = User  # Replace with your custom user model
-        # fields = UserCreationForm.Meta.fields + ('category',)
-        fields = UserCreationForm.Meta.fields + ('category', 'profile_picture',)
+        model = User
+        fields = UserCreationForm.Meta.fields + ('category',)

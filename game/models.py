@@ -12,8 +12,13 @@ class Game(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     active = models.BooleanField(default=True)
     uploaded = models.BooleanField(default=False)
+
+    ######################################################################
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploader')
+    ######################################################################
+
     image = models.ImageField(upload_to='static/game_images', null=True, blank=True)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, related_name='users')
 
     def __str__(self):
         return f'{self.title}'

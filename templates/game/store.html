@@ -27,13 +27,15 @@
                             <p class="card-text">Price: {{ game.price }} €</p>
                         </div>
                         <div class="right-side">
-                            {% if game.uploaded %}
+
+                            {% if game.uploader == request.user %}
                                 <button class="btn btn-dark" disabled>Developed</button>
                             {% elif game.id in owned_games_ids %}
                                 <button class="btn btn-success align-items-center" disabled>Owned</button>
                             {% else %}
                                 <a href="{% url 'purchase_game' game.id %}" class="btn btn-primary align-items-center">Purchase</a>
                             {% endif %}
+
                         </div>
                     </div>
                 </div>
