@@ -1,5 +1,3 @@
-from random import randint
-
 from django.contrib.auth import models, get_user_model
 from django.contrib.auth.models import User, Group
 from django.core.mail import send_mail

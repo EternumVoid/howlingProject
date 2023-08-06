@@ -9,7 +9,6 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = '__all__'
         exclude = ['users', 'uploader']
-        # fields = ['title', 'genre', 'developer', 'release_date', 'description', 'uploaded', 'price', 'image']
         widgets = {
             'title': TextInput(attrs={'placeholder': 'Enter the game title', 'class': 'form-control'}),
             'genre': TextInput(attrs={'placeholder': 'Enter the game genre', 'class': 'form-control'}),
@@ -35,7 +34,6 @@ class GameUpdateForm(forms.ModelForm):
         model = Game
         fields = '__all__'
         exclude = ['users']
-        # fields = ['title', 'genre', 'developer', 'release_date', 'description', 'price', 'image']
         widgets = {
             'title': TextInput(attrs={'placeholder': 'Enter the game title', 'class': 'form-control'}),
             'genre': TextInput(attrs={'placeholder': 'Enter the game genre', 'class': 'form-control'}),

@@ -10,14 +10,14 @@
 }
 
 body {
-    margin: 0; /* Remove default body margin */
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .centered-div {
-    margin: 0; /* Remove default body margin */
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;

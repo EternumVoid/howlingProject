@@ -1,11 +1,10 @@
 .card {
-    /* Set the card size and other styles as needed */
     width: 300px;
     height: 600px;
     border-radius: 10px;
     background-color: #ffffff;
-    box-shadow: 0 0 15px rgb(0, 186, 253); /* Add initial blue glow */
-    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for glow effect */
+    box-shadow: 0 0 15px rgb(0, 186, 253);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 .card:hover {
@@ -20,10 +19,10 @@
 }
 
 .left-side {
-    flex: 1; /* Take half of the available width */
+    flex: 1;
 }
 
 .right-side {
-    flex: 1; /* Take half of the available width */
-    text-align: right; /* Align the button to the right */
+    flex: 1;
+    text-align: right;
 }

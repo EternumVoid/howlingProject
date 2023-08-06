@@ -1,11 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from django.views.generic.edit import BaseFormView
-
 from game.filters import GameFilters
 from game.forms import GameForm, GameUpdateForm
 from game.models import Game
@@ -18,7 +16,6 @@ class GameCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('library')
     permission_required = 'game.add_game'
 
-    # ##############################################################################
     def form_valid(self, form):
         if form.is_valid():
             game = form.save(commit=False)
@@ -35,7 +32,6 @@ class GameHomeView(ListView):
 
     def get_queryset(self):
         return Game.objects.filter(active=True)
-        # .order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -45,7 +41,6 @@ class GameHomeView(ListView):
         context['all_games'] = get_all_games
         context['form_filters'] = my_filters.form
 
-        # ##############################################################################
         user = self.request.user
         owned_games_ids = get_all_games.filter(users=user).values_list('id', flat=True)
         context['owned_games_ids'] = list(owned_games_ids)
@@ -56,7 +51,6 @@ class GameHomeView(ListView):
 class GameListView(LoginRequiredMixin, ListView):
     template_name = 'game/library.html'
     model = Game
-    # context_object_name = 'all_games'
     permission_required = 'game.view_game'
 
     def get_queryset(self):
@@ -70,7 +64,6 @@ class GameListView(LoginRequiredMixin, ListView):
         context['uploaded_games'] = filtered_games.filter(uploaded=True)
         context['form_filters'] = my_filters.form
 
-        # #####################################################################
         user = self.request.user
         games = Game.objects.filter(users=user)
         game_count = games.count()
@@ -99,9 +92,6 @@ class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'registration/profile.html'
     model = User
 
-    # success_url = reverse_lazy('home_page')
-
-    # ############################################################################################
     def get_queryset(self):
         return Game.objects.filter(active=True)
 
@@ -121,31 +111,13 @@ class ProfileView(LoginRequiredMixin, ListView):
         return context
 
 
-# ############################################################################################
-
 @login_required
 def purchase_game(request, game_id):
     game = Game.objects.get(pk=game_id)
     user = request.user
     if game.users.filter(username=user.username).count() == 0:
         game.users.add(request.user)
-        # game.save_m2m()
         game.save()
         return redirect('library')
     else:
         return redirect('store')
-
-# @login_required
-# def library(request):
-#     user = request.user
-#     games = Game.objects.filter(users=user)
-#     game_count = games.count()
-#     context = {
-#         'library_games': games,
-#         'game_count': game_count,
-#     }
-
-# games = Game.objects.filter(users__in=[request.user])
-# context = {'library_games': games}
-
-# return render(request, 'game/library.html', context)

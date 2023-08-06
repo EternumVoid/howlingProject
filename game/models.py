@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.shortcuts import render
 
 
 class Game(models.Model):
@@ -13,9 +12,7 @@ class Game(models.Model):
     active = models.BooleanField(default=True)
     uploaded = models.BooleanField(default=False)
 
-    ######################################################################
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploader')
-    ######################################################################
 
     image = models.ImageField(upload_to='static/game_images', null=True, blank=True)
     users = models.ManyToManyField(User, related_name='users')

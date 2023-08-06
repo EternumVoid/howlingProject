@@ -11,6 +11,5 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
 
     path('purchase/<int:game_id>/', views.purchase_game, name='purchase_game'),
-    # path('user_library/', views.library, name='user_library'),
 
 ]

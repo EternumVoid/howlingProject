@@ -16,15 +16,12 @@
         <br><br><br>
 
         <div class="purchased">
-            {#            <h3><i class="fa fa-bars" aria-hidden="true"></i> All purchased games ( {{ all_games.count }} )</h3>#}
             <h3><i class="fa fa-bars" aria-hidden="true"></i> All purchased games ( {{ game_count }} )</h3>
         </div>
 
         <br>
 
-        {#                        {% for game in all_games %}#}
         {% for game in library_games %}
-
             <div class="card text-bg-dark mb-3 h-100" style="max-width: 50rem;">
                 <div class="row g-0">
                     <div class="centered-div col-md-6">
@@ -42,12 +39,9 @@
                     </div>
                 </div>
             </div>
-
         {% endfor %}
-        {#                {% endfor %}#}
 
         {% if perms.game.add_game or perms.game.change_game or perms.game.delete_game %}
-
             <div class="purchased">
                 <h3><i class="fa fa-star" aria-hidden="true"></i> All uploaded games ( {{ uploaded_games.count }} )</h3>
             </div>
@@ -55,7 +49,6 @@
             <br>
 
             {% for game in uploaded_games %}
-
                 <div class="card text-bg-dark mb-3 h-100" style="max-width: 50rem;">
                     <div class="row g-0">
                         <div class="centered-div col-md-6">
@@ -89,7 +82,6 @@
 
                     </div>
                 </div>
-
             {% endfor %}
 
         {% endif %}
