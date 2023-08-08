@@ -1,0 +1,21 @@
+.btn-glow-danger {
+    border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-glow-danger:hover {
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+}
+
+.btn-glow-warning {
+    border-radius: 10px;
+    background-color: rgb(255, 253, 0);
+    box-shadow: 0 0 15px rgb(255, 253, 0);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-glow-warning:hover {
+    box-shadow: 0 0 30px rgb(255, 253, 0);
+}

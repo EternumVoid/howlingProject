@@ -1,0 +1,24 @@
+.card {
+    border-radius: 10px;
+    background-color: #000000;
+    box-shadow: 0 0 15px rgb(0, 0, 0);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0 30px rgb(0, 0, 0);
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-div {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
